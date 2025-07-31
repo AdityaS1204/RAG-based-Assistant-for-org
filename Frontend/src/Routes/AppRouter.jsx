@@ -1,9 +1,18 @@
-import React from 'react'
 import { createBrowserRouter } from 'react-router-dom'
-const AppRouter = () => {
-  return (
-    <div>AppRouter</div>
-  )
-}
+import App from '../App'
+import Login from '../Pages/Login' 
+
+const AppRouter = createBrowserRouter([
+  {
+    path:'/',
+    element:<App/>,
+    children:[
+      {
+        path:'/login',
+        element:<Login/>
+      }
+    ]
+  }
+])
 
 export default AppRouter
