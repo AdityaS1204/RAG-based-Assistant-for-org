@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import Piechart from '../components/Charts/Piechart'
 import DashboardCard from '../components/custom/DashboardCard'
+import RequestsLineChart from '../components/Charts/RequestsLineChart'
 import Modal from '../components/custom/Modal'
 
 const Dashboard = () => {
@@ -57,35 +58,47 @@ const Dashboard = () => {
             </AnimatePresence>
           </div>
         </header>
-        <div className='flex justify-center h-screen py-22 w-full'>
-          <div className='flex gap-3 w-9/12 bg-neutral-700/30 rounded-lg p-4'>
-            <div className="bg-neutral-700/50 rounded-lg p-4 w-1/3 h-26 py-3 cursor-pointer hover:bg-neutral-700/70 transition-all duration-300" onClick={() => setIsModalOpen(true)} >
-              <p className='text-2xl font-bold'>100</p>
-              <p className='text-sm font-bold text-neutral-400'>Total Users</p>
-              <p className='text-sm text-neutral-400'>Growth Trend of Users</p>
+        
+        <div className="flex-1 overflow-y-auto p-6">
+          <div className="max-w-7xl mx-auto space-y-6">
+            <div>
+              <p className="text-neutral-400">Monitor UNIRAG assistant usage and system performance</p>
             </div>
-            <div className="bg-neutral-700/50 rounded-lg p-4 w-1/3 h-26 py-3">
-              <p className='text-2xl font-bold'>324</p>
-              <p className='text-sm font-bold text-neutral-400'>Total Documents</p>
-              <p className='text-sm text-neutral-400'>Growth Trend of Documents</p>
+
+            {/* Four Cards Row */}
+            <div className='flex gap-4 w-full'>
+              <div className="bg-neutral-700/50 rounded-lg p-4 w-1/4 h-26 py-3 cursor-pointer hover:bg-neutral-700/70 transition-all duration-300" onClick={() => setIsModalOpen(true)} >
+                <p className='text-2xl font-bold'>100</p>
+                <p className='text-sm font-bold text-neutral-400'>Total Users</p>
+                <p className='text-sm text-neutral-400'>Growth Trend of Users</p>
+              </div>
+              <div className="bg-neutral-700/50 rounded-lg p-4 w-1/4 h-26 py-3">
+                <p className='text-2xl font-bold'>324</p>
+                <p className='text-sm font-bold text-neutral-400'>Total Documents</p>
+                <p className='text-sm text-neutral-400'>Growth Trend of Documents</p>
+              </div>
+              <div className="bg-neutral-700/50 rounded-lg p-4 w-1/4 h-26 py-3">
+                <p className='text-2xl font-bold'>1000</p>
+                <p className='text-sm font-bold text-neutral-400'>Total Chats</p>
+                <p className='text-sm text-neutral-400'>Growth Trend of Chats</p>
+              </div>
+              <div className="bg-neutral-700/50 rounded-lg p-4 w-1/4 h-26 py-3">
+                <p className='text-2xl font-bold'>Online</p>
+                <p className='text-sm font-bold text-neutral-400'>System Status</p>
+              </div>
             </div>
-            <div className="bg-neutral-700/50 rounded-lg p-4 w-1/3 h-26 py-3">
-              <p className='text-2xl font-bold'>1000</p>
-              <p className='text-sm font-bold text-neutral-400'>Total Chats</p>
-              <p className='text-sm text-neutral-400'>Growth Trend of Chats</p>
-            </div>
-            <div className="bg-neutral-700/50 rounded-lg p-4 w-1/3 h-26 py-3">
-              <p className='text-2xl font-bold'>Online</p>
-              <p className='text-sm font-bold text-neutral-400'>System Status</p>
-            </div>
+
+            {/* Requests Line Chart */}
+            <RequestsLineChart />
+
+            {/* Users Distribution Modal */}
+            <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Users distribution" size="md">
+              <DashboardCard title="" size="sm" className='w-full h-96 py-3'>
+                <Piechart />
+              </DashboardCard>
+            </Modal>
           </div>
-          <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} title="Users distribution" size="md">
-            <DashboardCard title="" size="sm" className='w-full h-96 py-3'>
-              <Piechart />
-            </DashboardCard>
-          </Modal>
         </div>
-        <h1 className='text-2xl font-bold'>Welcome to the Dashboard</h1>
       </div>
     </section>
   )
