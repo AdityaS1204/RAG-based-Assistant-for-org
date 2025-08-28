@@ -313,7 +313,7 @@ const ActivityLogs = () => {
             <div className="bg-neutral-700/50 rounded-lg overflow-hidden max-w-4xl mx-auto">
               <Table>
                 <TableHeader>
-                  <TableRow className="border-neutral-600">
+                  <TableRow className="border-neutral-600 hover:bg-neutral-700/50">
                     <TableHead className="text-neutral-300 font-medium">DATE</TableHead>
                     <TableHead className="text-neutral-300 font-medium">USER</TableHead>
                     <TableHead className="text-neutral-300 font-medium">KIND</TableHead>
@@ -323,7 +323,7 @@ const ActivityLogs = () => {
                 </TableHeader>
                 <TableBody>
                   {currentLogs.map((log) => (
-                    <TableRow key={log.id} className="border-neutral-600 p-0">
+                    <TableRow key={log.id} className="border-neutral-600 hover:bg-neutral-700/50 p-0">
                       <TableCell className="text-neutral-300">
                         {format(log.dateTime, 'MMM dd, hh:mm a')}
                       </TableCell>
