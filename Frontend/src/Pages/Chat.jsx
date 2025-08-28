@@ -1,15 +1,17 @@
 import React, { useState, useRef } from 'react'
-import Sidebar from '../Component/Sidebar'
-import ChatInputBox from '../Component/ChatInputBox'
+import Sidebar from '../components/custom/Sidebar'
+import ChatInputBox from '../components/custom/ChatInputBox'
 import { LogOut, User } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
- 
+import {useNavigate} from 'react-router-dom' 
+
+
 const Chat = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
   const [isAvatarDropdownOpen, setIsAvatarDropdownOpen] = useState(false)
   const [messages, setMessages] = useState([])
   const [hasStartedChat, setHasStartedChat] = useState(false)
-  
+  const navigate = useNavigate()
   
   const username = "Albert Rangari"
 
@@ -29,7 +31,6 @@ const Chat = () => {
       setHasStartedChat(true)
     }
     
-    // Add user message to chat
     const newMessage = {
       id: Date.now(),
       text: message,
@@ -38,11 +39,10 @@ const Chat = () => {
     }
     setMessages(prev => [...prev, newMessage])
     
-    // Simulate AI response (you can replace this with actual API call)
     setTimeout(() => {
       const aiMessage = {
         id: Date.now() + 1,
-        text: "This is a simulated AI response. In a real implementation, this would be the actual AI response from your backend.",
+        text: "This is a simulated AI response. In a real implementation, this would be the actual AI response from the backend.",
         sender: 'ai',
         timestamp: new Date()
       }
@@ -52,7 +52,7 @@ const Chat = () => {
 
   const handleLogout = () => {
     console.log('Logging out...')
-    // Add logout logic here
+    navigate('/login')
   }
 
   return (
@@ -138,14 +138,9 @@ const Chat = () => {
                     className={`flex gap-3 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                   >
                     {message.sender === 'ai' && (
-                      <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center flex-shrink-0">
-                        <svg width="16" height="16" viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg">
-                          <rect width="50" height="50" rx="10" ry="10" fill="#e4e892" />
-                          <text x="50%" y="50%" textAnchor="middle" dominantBaseline="central" fontSize="12" fontWeight="bold" fill="#000">UR</text>
-                        </svg>
-                      </div>
+                     <></>
                     )}
-                    <div className={`max-w-[80%] ${message.sender === 'user' ? 'order-2' : 'order-1'}`}>
+                    <div className={`max-w-[100%] ${message.sender === 'user' ? 'order-2' : 'order-1'}`}>
                       <div className={`rounded-2xl px-4 py-3 ${
                         message.sender === 'user' 
                           ? 'bg-blue-500 text-white' 
@@ -155,8 +150,8 @@ const Chat = () => {
                       </div>
                     </div>
                     {message.sender === 'user' && (
-                      <div className="w-8 h-8 rounded-full bg-neutral-600 flex items-center justify-center flex-shrink-0 order-1">
-                        <User size={16} className="text-white" />
+                      <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 order-1  ">
+                        
                       </div>
                     )}
                   </motion.div>
@@ -168,7 +163,7 @@ const Chat = () => {
 
         {/* Chat Input Box at bottom when chat has started */}
         {hasStartedChat && (
-          <div className="bg-neutral-800 border-t border-neutral-600 p-4">
+          <div className="bg-neutral-800 mask-t-to-neutral-800 mask-t-from-15% border-neutral-600 p-4">
             <div className="max-w-4xl mx-auto">
               <ChatInputBox 
                 onSend={handleSendMessage}

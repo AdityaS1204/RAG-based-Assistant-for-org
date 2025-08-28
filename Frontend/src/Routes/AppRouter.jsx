@@ -3,6 +3,10 @@ import App from '../App'
 import Login from '../Pages/Login' 
 import Dashboard from '../Pages/Dashboard'
 import Chat from '../Pages/Chat'
+import UsersList from '../Pages/Admin/UsersList'
+import Uploads from '../Pages/Admin/Uploads'
+import ActivityLogs from '../Pages/Admin/ActivityLogs'
+
 const AppRouter = createBrowserRouter([
   {
     path:'/',
@@ -20,6 +24,18 @@ const AppRouter = createBrowserRouter([
         path:'/chat',
         element:<Chat/>
       },
+      {
+        path:'/admin/users',
+        element:<UsersList/>
+      },
+      {
+        path:'/admin/uploads',
+        element:<Uploads/>
+      },
+      {
+        path:'/admin/activity-logs',
+        element:<ActivityLogs/>
+      }
     ]
   }
 ])
