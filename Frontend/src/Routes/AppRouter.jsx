@@ -1,4 +1,4 @@
-import { createBrowserRouter } from 'react-router-dom'
+import { createBrowserRouter, Navigate } from 'react-router-dom'
 import App from '../App'
 import Login from '../Pages/Login' 
 import Dashboard from '../Pages/Dashboard'
@@ -12,6 +12,10 @@ const AppRouter = createBrowserRouter([
     path:'/',
     element:<App/>,
     children:[
+      {
+        path:'/',
+        element:<Navigate to='/login' replace/>
+      },
       {
         path:'/login',
         element:<Login/>
