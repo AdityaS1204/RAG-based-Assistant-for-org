@@ -1,21 +1,25 @@
-import React from 'react'
-import AdminDashboardSidebar from '../../components/custom/AdminDashboardSidebar' 
-import { useState } from 'react'
+import React, { useState } from 'react'
+import AdminDashboardSidebar from '../../components/custom/AdminDashboardSidebar'
+import DocumentUploadForm from '../../components/custom/DocumentUploadForm'
+import DocumentList from '../../components/custom/DocumentList'
 import { motion, AnimatePresence } from 'framer-motion'
 import { User, LogOut } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
+
 const Uploads = () => {
   const [isAvatarDropdownOpen, setIsAvatarDropdownOpen] = useState(false)
   const [isSidebarOpen, setIsSidebarOpen] = useState(false)
   const navigate = useNavigate()
+  
   const handleLogout = () => {
     console.log('Logging out...')
     navigate('/login')
   }
+  
   return (
-    <section>
-        <AdminDashboardSidebar />
-        <div className={`flex-1 flex flex-col transition-all duration-300 ${isSidebarOpen ? 'ml-20' : 'ml-64'}`}>
+    <section className="flex h-screen bg-neutral-800 text-white overflow-hidden">
+      <AdminDashboardSidebar onSidebarToggle={() => setIsSidebarOpen(!isSidebarOpen)} />
+      <div className={`flex-1 flex flex-col transition-all duration-300 ${isSidebarOpen ? 'ml-20' : 'ml-64'}`}>
         <header className="flex items-center justify-end p-4 bg-neutral-900">
           {/* Avatar and Dropdown */}
           <div className="relative">
@@ -52,8 +56,23 @@ const Uploads = () => {
             </AnimatePresence>
           </div>
         </header>
-          <h1 className='text-2xl font-bold'>Uploaded Files</h1>
+        
+        <div className="flex-1 overflow-y-auto p-6">
+          <div className="max-w-7xl mx-auto space-y-8">
+            {/* Header Section */}
+            <div>
+              <h1 className='text-3xl font-bold text-white mb-2'>Document Management</h1>
+              <p className="text-neutral-400">Upload and manage documents for different user groups</p>
+            </div>
+
+            {/* Document Upload Form */}
+            <DocumentUploadForm />
+
+            {/* Document List */}
+            <DocumentList />
+          </div>
         </div>
+      </div>
     </section>
   )
 }
