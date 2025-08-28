@@ -152,7 +152,7 @@ const PasswordChange = ({onsuccess}) => {
     // otp step
     const renderOtpStep = () => (
         <div className='flex flex-col gap-4'>
-            <div>
+    <div>
                 <p className='text-sm text-green-500 mb-2'>✓ OTP sent to {email}</p>
                 <form onSubmit={handleSubmit(handleOtpSubmit)}>
                     <label htmlFor="otp" className='block text-sm font-medium my-2 '>Enter OTP</label>
@@ -259,8 +259,8 @@ const PasswordChange = ({onsuccess}) => {
                             </button>
                         </div>
                         {errors.confirmPassword && <span className="text-red-500 text-xs mt-1">{errors.confirmPassword.message}</span>}
-                    </div>
-
+            </div>
+            
                     <button
                         type="submit"
                         disabled={isLoading}
@@ -269,7 +269,7 @@ const PasswordChange = ({onsuccess}) => {
                         {isLoading ? 'Changing Password...' : 'Change Password'}
                     </button>
                 </div>
-            </form>
+        </form>
         </div>
     )
 
@@ -310,7 +310,7 @@ return (
         {currentStep === 'otp' && renderOtpStep()}
         {currentStep === 'password' && renderPasswordStep()}
     </div>
-)
+  )
 }
 
 export default PasswordChange
