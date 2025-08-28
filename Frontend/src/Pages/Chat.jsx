@@ -13,7 +13,7 @@ const Chat = () => {
   const [hasStartedChat, setHasStartedChat] = useState(false)
   const navigate = useNavigate()
   
-  const username = "Albert Rangari"
+  const username = "Gaurav Yadav"
 
   const handleNewChat = () => {
     console.log('New chat requested')
