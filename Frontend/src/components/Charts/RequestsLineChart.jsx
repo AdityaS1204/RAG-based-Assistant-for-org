@@ -87,7 +87,7 @@ const RequestsLineChart = () => {
     <div className="bg-neutral-700/50 rounded-lg p-6 w-full">
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h3 className="text-xl font-semibold text-white mb-1">UNIRAG Assistant Requests</h3>
+          <h3 className="text-xl font-semibold text-white mb-1">Assistant Requests</h3>
           <p className="text-neutral-400 text-sm">Track request patterns and usage trends</p>
         </div>
         
