@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import { MessageSquare, Settings, PanelLeft, PanelLeftClose, Plus } from 'lucide-react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence } from 'motion/react'
 import Modal from '../custom/Modal'
+import Setting from './Settings'
+
 const Sidebar = ({ onNewChat, onSidebarToggle }) => {
     const [isOpen, setIsOpen] = useState(true)
     const [isModalOpen, setIsModalOpen] = useState(false)
+    
     const toggleSidebar = () => {
         const newState = !isOpen
         setIsOpen(newState)
@@ -343,9 +346,7 @@ const Sidebar = ({ onNewChat, onSidebarToggle }) => {
                                     className="flex items-center gap-3 w-full p-3 rounded-lg hover:bg-neutral-700/50 transition-colors duration-200 text-left"
                                     whileHover={{ x: 5 }}
                                     whileTap={{ scale: 0.98 }}
-                                    onClick={() => {
-                                        setIsModalOpen(true)
-                                    }}
+                                    onClick={() => setIsModalOpen(true)}
                                 >
                                     <motion.div
                                         whileHover={{ rotate: 180 }}
@@ -366,9 +367,7 @@ const Sidebar = ({ onNewChat, onSidebarToggle }) => {
                                     className="flex items-center justify-center w-full p-3 rounded-lg hover:bg-neutral-700/50 transition-colors duration-200"
                                     whileHover={{ scale: 1.1 }}
                                     whileTap={{ scale: 0.95 }}
-                                    onClick={() => {
-                                        setIsModalOpen(true)
-                                    }}
+                                    onClick={() => setIsModalOpen(true)}
                                 >
                                     <motion.div
                                         whileHover={{ rotate: 180 }}
@@ -382,11 +381,9 @@ const Sidebar = ({ onNewChat, onSidebarToggle }) => {
                     </AnimatePresence>
                 </div>
             </motion.div>
-            <Modal isOpen={isModalOpen} size='lg' onClose={() => setIsModalOpen(false)}>
-                <div>
-                    <h1>Settings</h1>
-                </div>
-            </Modal>
+
+            {/* Settings Component */}
+            <Setting isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
         </div>
     )
 }
