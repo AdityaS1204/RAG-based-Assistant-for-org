@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { ArrowLeft, Github, EyeOff, Eye } from 'lucide-react'
 import { useForm } from 'react-hook-form'
 import Modal from '../components/custom/Modal'
 import PasswordChange from '@/components/auth/PasswordChange'
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
 const Login = () => {
 
@@ -12,11 +13,13 @@ const Login = () => {
   const [Formdata, setFormdata] = useState('')
   const [Loading, setLoading] = useState(false)
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const roleRef = useRef(null)
+  
   const togglePasswordView = () => {
     setIspassVisible(!ispassVisible)
   }
 
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, formState: { errors }, setValue } = useForm();
   const navigate = useNavigate()
   const onsubmit = (data) => {
     setFormdata(data)
@@ -84,13 +87,30 @@ const Login = () => {
                   </div>
                   <div className='flex flex-col gap-1 '>
                     <label htmlFor="Role">Role</label>
-                    <select name="role" id="Role" {...register('Role', { required: 'Role is required' })} className='py-2 px-4 w-full bg-neutral-600/30 p-1 outline-none rounded-lg focus:ring-2 focus:outline-none focus:ring-[blue] focus:border-[blue]' onChange={(e) => setRole(e.target.value)} >
-                      <option value="Student">Student</option>
-                      <option value="HOD">HOD</option>
-                      <option value="Faculty">Faculty</option>
-                      <option value="Staff">Staff</option>
-                      <option value="Admin">Admin</option>
-                    </select>
+                    <Select 
+                      value={Role} 
+                      onValueChange={(value) => {
+                        setRole(value);
+                        setValue('Role', value);
+                      }}
+                    >
+                      <SelectTrigger className='py-2 px-4 w-full bg-neutral-600/30 p-1 outline-none rounded-lg focus:ring-2 focus:outline-none focus:ring-[blue] focus:border-[blue] border-neutral-600/30 text-white'>
+                        <SelectValue placeholder="Select a role" />
+                      </SelectTrigger>
+                      <SelectContent className='bg-neutral-800 border-neutral-600'>
+                        <SelectItem value="Student" className='text-white hover:bg-neutral-700'>Student</SelectItem>
+                        <SelectItem value="HOD" className='text-white hover:bg-neutral-700'>HOD</SelectItem>
+                        <SelectItem value="Faculty" className='text-white hover:bg-neutral-700'>Faculty</SelectItem>
+                        <SelectItem value="Staff" className='text-white hover:bg-neutral-700'>Staff</SelectItem>
+                        <SelectItem value="Admin" className='text-white hover:bg-neutral-700'>Admin</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    {/* Hidden input for react-hook-form validation */}
+                    <input 
+                      type="hidden" 
+                      {...register('Role', { required: 'Role is required' })}
+                      value={Role}
+                    />
                     {errors.Role && <span className="text-red-500 text-xs mt-1">{errors.Role.message}</span>}
                   </div>
                   {Role != 'Student' ? <div className='flex flex-col gap-1 '>
